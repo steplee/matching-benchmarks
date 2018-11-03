@@ -9,6 +9,7 @@ find_package(Boost COMPONENTS timer system)
 
 include_directories(${EIGEN3_INCLUDE_DIRS})
 include_directories(${CMAKE_CURRENT_SOURCE_DIRECTORY}/src)
+include_directories(${CMAKE_CURRENT_SOURCE_DIRECTORY}/src/quad)
 
 #set(CMAKE_CUDA_FLAGS "--use_fast_math")
 
@@ -21,7 +22,14 @@ add_library(grid_impl
   #src/grid_cuda.cu
 )
 
+add_library(quad_impl
+  src/quad/quad.cu
+)
+
 add_executable(grid_bench src/bench.cc)
+add_executable(quad_test src/quad/test.cu)
 
 target_link_libraries(grid_impl PUBLIC ${Boost_TIMER_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 target_link_libraries(grid_bench grid_impl)
+target_link_libraries(quad_impl PUBLIC ${Boost_TIMER_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+target_link_libraries(quad_test quad_impl)

@@ -13,6 +13,8 @@ So far I have:
       4. (*TODO*) Method (3), plus another array to prevent cross-matching and handle injectivity.
 
 
+The cuda implementations include malloc, memcpy, and free in the times, so using `cudaMallocManaged` might actually make it faster, particularly if they are already on GPU.
+
 ### Result
 ```
 slee/stuff/grid_benchmarks/build git/master*  
